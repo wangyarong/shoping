@@ -1,0 +1,99 @@
+@import "quote";
+
+//递归思想
+.gird(@type,@i:1) when (@i<=@cols){
+  .col-@{type}-@{i} {
+    width:100/@cols * @i * 1%;
+  }
+  .gird(@type,@i + 1);
+}
+
+.colsx(@type,@i:1) when (@i<=@colsx){
+  .cool-@{type}-@{i} {
+    width:100/@colsx * @i * 1%;
+  }
+  .colsx(@type,@i + 1);
+}
+.colsx(xs);
+.pad(){
+  padding-left:@padding;
+  padding-right:@padding;
+}
+.container{
+  &-fuild{
+    display:block;
+    .pad();
+    height:auto;
+  }
+  &{
+    display:block;
+    .pad();
+    height:auto;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  &-fuild .row,& .row{
+    display:block;
+    height:auto;
+    margin-left: -@padding;
+    margin-right: -@padding;
+  }
+  &-fuild .row:after,& .row:after,&-fuild .row:before,& .row:before{
+    content:"";
+    display:block;
+    clear:both;
+  }
+}
+.gird(xs);
+[class*=col-]{
+  float:left;
+  padding-left:@padding;
+  padding-right:@padding;
+}
+[class*=cool-]{
+  float:left;
+  padding-left:@padding;
+  padding-right:@padding;
+}
+@media screen and (min-width:@smWidth){
+  .container{
+    width:@smWidth - @padding * 2;
+  }
+  .gird(sm);
+  .colsx(sm)
+}
+@media screen and (min-width:@mdWidth){
+  .container{
+    width:@mdWidth - @padding * 2;
+  }
+  .gird(md);
+  .colsx(md);
+}
+@media screen and (min-width:@lgWidth){
+  .container{
+    width:@lgWidth - @padding * 2;
+  }
+  .gird(lg);
+  .colsx(lg)
+}
+
+@media screen and (max-width:@smWidth){
+  .hidden-xs{
+    display:none;
+  }
+}
+@media screen and (max-width:@mdWidth) and (min-width:@smWidth){
+  .hidden-sm{
+    display:none;
+  }
+}
+@media screen and (max-width:@lgWidth) and (min-width:@mdWidth){
+  .hidden-md{
+    display:none;
+  }
+}
+@media screen and (min-width:@lgWidth){
+  .hidden-lg{
+    display:none;
+  }
+}
